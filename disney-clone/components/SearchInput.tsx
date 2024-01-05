@@ -30,6 +30,7 @@ function SearchInput() {
     console.log(values);
 
     router.push(`/search/${values.input}`);
+    form.reset();
   }
 
   return (
