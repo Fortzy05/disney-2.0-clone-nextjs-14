@@ -11,8 +11,8 @@ function GenreDropdown() {
     },
   };
 
-  const response = await fetch(url, options)
-  const data = (await response.json()) as Genre
+  // const response = await fetch(url, options)
+  // const data = (await response.json()) as Genre
 
   return <div>GenreDropdown</div>;
 }
