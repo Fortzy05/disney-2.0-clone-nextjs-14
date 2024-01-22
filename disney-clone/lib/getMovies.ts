@@ -10,7 +10,7 @@ async function fetchFromTMDB(url: URL, cacheTime?: number) {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: "Bearer ${process.env.TMDB_API_KEY}",
+      Authorization: `Bearer ${process.env.TMDB_API_KEY}`,
     },
     next: {
       revalidate: cacheTime || 60 * 60 * 24,
@@ -19,7 +19,7 @@ async function fetchFromTMDB(url: URL, cacheTime?: number) {
 
   const response = await fetch(url.toString(), options);
   const data = (await response.json()) as SearchResults;
-
+  console.log(data);
   return data;
 }
 export async function getUpcomingMovies() {
@@ -48,8 +48,8 @@ export async function getDiscoveredMovies(id?: string, keywords?: string) {
 }
 
 export async function getSearchedMovies(term: string) {
-    const url = new URL("https://api.themoviedb.org/3/search/movie");
-    url.searchParams.set("query", term);
-    const data = await fetchFromTMDB(url);
-    return data.results;
+  const url = new URL("https://api.themoviedb.org/3/search/movie");
+  url.searchParams.set("query", term);
+  const data = await fetchFromTMDB(url);
+  return data.results;
 }

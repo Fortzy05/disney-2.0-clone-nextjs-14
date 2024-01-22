@@ -22,9 +22,16 @@ async function GenreDropdown() {
       revalidate: 60 * 60 * 24,
     },
   };
+  console.log("TMDB_API_KEY:", process.env.TMDB_API_KEY);
 
-  const response = await fetch(url, options);
+  const response = await fetch(url.toString(), options);
+  if (!response.ok) {
+    // Handle the error, e.g., log it or show a user-friendly message
+    console.error(`Error fetching genres: ${response.statusText}`);
+    return null; // or throw an error, depending on your error-handling strategy
+  }
   const data = (await response.json()) as Genres;
+  console.log(data);
 
   return (
     <DropdownMenu>
@@ -33,14 +40,14 @@ async function GenreDropdown() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>Select a Genre</DropdownMenuLabel>
-        <DropdownMenuSeparator/>
-        {data.genres.map(genre => (
+        <DropdownMenuSeparator />
+        {data.genres.map((genre) => (
           <DropdownMenuItem key={genre.id}>
-            <Link href={`/genre/${genre.id}?genre=${genre.name}`} >
-            {genre.name}
+            <Link href={`/genre/${genre.id}?genre=${genre.name}`}>
+              {genre.name}
             </Link>
           </DropdownMenuItem>
-        ) )}
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
