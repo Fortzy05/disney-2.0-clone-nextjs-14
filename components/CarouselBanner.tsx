@@ -1,8 +1,8 @@
 "use client";
 
-import { Movie } from "@/typings";
-import useEmblaCaroucel from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { Movie } from "@/typings";
 import Image from "next/image";
 import getImagePath from "@/lib/getImagePath";
 
@@ -12,7 +12,7 @@ type Props = {
 
 Autoplay.globalOptions = { delay: 8000 };
 function CarouselBanner({ movies }: Props) {
-  const [emblaRef] = useEmblaCaroucel({ loop: true, duration: 100 }, [
+  const [emblaRef] = useEmblaCarousel({ loop: true, duration: 100 }, [
     Autoplay(),
   ]);
   return (
